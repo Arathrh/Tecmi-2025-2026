@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portal Estudiantil - Tecmilenio</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --tec-dark-blue: #004b61;
+            --tec-teal: #008a96;
+            --tec-light-teal: #6fbabf;
+            --bg-gray: #f4f7f6;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            display: flex;
+            height: 100vh;
+            background-color: var(--bg-gray);
+        }
+
+        /* --- Barra Lateral --- */
+        nav {
+            width: 250px;
+            background-color: var(--tec-dark-blue);
+            color: white;
+            display: flex;
+            flex-direction: column;
+            padding: 20px 0;
+        }
+
+        .logo-container {
+            padding: 0 20px 30px;
+            font-weight: bold;
+            font-size: 1.2rem;
+            letter-spacing: 1px;
+        }
+
+        nav a {
+            padding: 15px 25px;
+            color: #d1e1e4;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            transition: 0.3s;
+        }
+
+        nav a:hover, nav a.active {
+            background-color: var(--tec-teal);
+            color: white;
+        }
+
+        nav i { margin-right: 15px; }
+
+        /* --- Contenedor Principal --- */
+        main {
+            flex-grow: 1;
+            padding: 40px;
+            overflow-y: auto;
+        }
+
+        section { display: none; }
+        section.active { display: block; }
+
+        /* --- Diseño de la Credencial --- */
+        .id-card {
+            width: 450px;
+            height: 280px;
+            background-color: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            position: relative;
+            overflow: hidden;
+            border: 1px solid #ddd;
+        }
+
+        .card-header {
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .tec-logo-text {
+            color: var(--tec-dark-blue);
+            font-weight: 800;
+            font-size: 1.1rem;
+        }
+
+        /* Cuadrícula decorativa (Pixel art) */
+        .pixel-decor {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            display: grid;
+            grid-template-columns: repeat(3, 12px);
+            gap: 2px;
+        }
+        .pixel { width: 12px; height: 12px; background: var(--tec-teal); }
+        .pixel.transparent { opacity: 0; }
+
+        .card-body {
+            display: flex;
+            background-color: var(--tec-dark-blue);
+            height: 180px;
+            margin-top: 10px;
+            color: white;
+            position: relative;
+        }
+
+        .photo-space {
+            width: 140px;
+            height: 160px;
+            background: #fff;
+            margin: -20px 0 0 20px;
+            border: 2px solid white;
+            z-index: 2;
+        }
+        
+        .photo-space img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .student-info {
+            padding: 20px;
+            flex-grow: 1;
+        }
+
+        .student-info h2 {
+            margin: 0;
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            line-height: 1.2;
+        }
+
+        .student-info p {
+            margin: 5px 0;
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        .campus-footer {
+            position: absolute;
+            bottom: 10px;
+            right: 15px;
+            font-size: 0.75rem;
+        }
+
+        /* --- Tabla de Horario --- */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        th { background: var(--tec-teal); color: white; padding: 15px; text-align: left; }
+        td { padding: 15px; border-bottom: 1px solid #eee; }
+
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="logo-container">TECMILENIO</div>
+        <a href="#" onclick="showSection('credencial')" class="active" id="link-credencial">
+            <i class="fas fa-id-card"></i> Credencial Digital
+        </a>
+        <a href="#" onclick="showSection('horario')" id="link-horario">
+            <i class="fas fa-calendar-alt"></i> Horario
+        </a>
+        <a href="#"><i class="fas fa-book"></i> Calificaciones</a>
+    </nav>
+
+    <main>
+        <section id="credencial" class="active">
+            <h1>Credencial Estudiantil</h1>
+            <div class="id-card">
+                <div class="card-header">
+                    <span class="tec-logo-text">TECMILENIO</span>
+                    <div class="pixel-decor">
+                        <div class="pixel transparent"></div><div class="pixel"></div><div class="pixel"></div>
+                        <div class="pixel"></div><div class="pixel"></div><div class="pixel"></div>
+                    </div>
+                </div>
+                
+                <div class="card-body">
+                    <div class="photo-space">
+                        <img src="https://via.placeholder.com/140x160?text=FOTO+JESUS" alt="Jesus Arath">
+                    </div>
+                    <div class="student-info">
+                        <h2>Jesus Arath<br>Reyna Hernandez</h2>
+                        <p><strong>AL03097935</strong></p>
+                        <p>Posgrado</p>
+                    </div>
+                    <div class="campus-footer">
+                        Campus Cuautitlán Izcalli
+                    </div>
+                </div>
+            </div>
+            <p style="color: #666; font-size: 0.8rem; margin-top: 20px;">Vigencia: 2024 (Digitalizada para Ciclo 2025-2026)</p>
+        </section>
+
+        <section id="horario">
+            <h1>Horario Master en IA (Ciclo 2025-2026)</h1>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Materia</th>
+                        <th>Día</th>
+                        <th>Hora</th>
+                        <th>Modalidad</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Deep Learning Aplicado</strong></td>
+                        <td>Lunes y Miércoles</td>
+                        <td>19:00 - 21:00</td>
+                        <td>Virtual / Online</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Ética y Gobernanza de la IA</strong></td>
+                        <td>Martes y Jueves</td>
+                        <td>19:00 - 21:00</td>
+                        <td>Presencial (Izcalli)</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+    </main>
+
+    <script>
+        function showSection(sectionId) {
+            // Ocultar todas las secciones
+            document.querySelectorAll('section').forEach(s => s.classList.remove('active'));
+            document.querySelectorAll('nav a').forEach(a => a.classList.remove('active'));
+            
+            // Mostrar la seleccionada
+            document.getElementById(sectionId).classList.add('active');
+            document.getElementById('link-' + sectionId).classList.add('active');
+        }
+    </script>
+</body>
+</html>

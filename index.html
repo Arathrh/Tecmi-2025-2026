@@ -14,7 +14,7 @@
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Segoe UI', Arial, sans-serif;
             margin: 0;
             display: flex;
             height: 100vh;
@@ -23,7 +23,7 @@
 
         /* --- Barra Lateral --- */
         nav {
-            width: 250px;
+            width: 260px;
             background-color: var(--tec-dark-blue);
             color: white;
             display: flex;
@@ -31,11 +31,11 @@
             padding: 20px 0;
         }
 
-        .logo-container {
-            padding: 0 20px 30px;
-            font-weight: bold;
-            font-size: 1.2rem;
-            letter-spacing: 1px;
+        .nav-logo {
+            width: 180px;
+            margin: 0 auto 30px auto;
+            display: block;
+            filter: brightness(0) invert(1); /* Hace el logo blanco */
         }
 
         nav a {
@@ -45,6 +45,7 @@
             display: flex;
             align-items: center;
             transition: 0.3s;
+            font-size: 0.95rem;
         }
 
         nav a:hover, nav a.active {
@@ -52,7 +53,7 @@
             color: white;
         }
 
-        nav i { margin-right: 15px; }
+        nav i { margin-right: 15px; width: 20px; text-align: center; }
 
         /* --- Contenedor Principal --- */
         main {
@@ -69,31 +70,37 @@
             width: 450px;
             height: 280px;
             background-color: white;
-            border-radius: 15px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            border-radius: 12px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
             position: relative;
             overflow: hidden;
-            border: 1px solid #ddd;
+            border: 1px solid #e0e0e0;
         }
 
         .card-header {
-            padding: 15px 20px;
+            padding: 12px 18px;
             display: flex;
-            justify-content: space-between;
             align-items: center;
+            gap: 10px;
+        }
+
+        .mini-logo {
+            height: 25px;
+            width: auto;
         }
 
         .tec-logo-text {
             color: var(--tec-dark-blue);
             font-weight: 800;
             font-size: 1.1rem;
+            letter-spacing: 0.5px;
         }
 
-        /* Cuadrícula decorativa (Pixel art) */
+        /* Cuadrícula decorativa */
         .pixel-decor {
             position: absolute;
-            top: 10px;
-            right: 10px;
+            top: 15px;
+            right: 15px;
             display: grid;
             grid-template-columns: repeat(3, 12px);
             gap: 2px;
@@ -104,19 +111,20 @@
         .card-body {
             display: flex;
             background-color: var(--tec-dark-blue);
-            height: 180px;
-            margin-top: 10px;
+            height: 185px;
+            margin-top: 15px;
             color: white;
             position: relative;
         }
 
         .photo-space {
-            width: 140px;
-            height: 160px;
-            background: #fff;
-            margin: -20px 0 0 20px;
-            border: 2px solid white;
+            width: 135px;
+            height: 165px;
+            background: #eee;
+            margin: -25px 0 0 20px;
+            border: 3px solid white;
             z-index: 2;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
         }
         
         .photo-space img {
@@ -126,63 +134,80 @@
         }
 
         .student-info {
-            padding: 20px;
+            padding: 20px 15px;
             flex-grow: 1;
         }
 
         .student-info h2 {
             margin: 0;
-            font-size: 1.1rem;
+            font-size: 1.05rem;
             text-transform: uppercase;
-            line-height: 1.2;
+            line-height: 1.3;
+            font-weight: 700;
         }
 
-        .student-info p {
-            margin: 5px 0;
-            font-size: 0.9rem;
+        .student-info .id-num {
+            margin: 8px 0 4px 0;
+            font-size: 0.95rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+
+        .student-info .level {
+            font-size: 0.85rem;
             opacity: 0.9;
         }
 
         .campus-footer {
             position: absolute;
-            bottom: 10px;
-            right: 15px;
+            bottom: 12px;
+            right: 18px;
             font-size: 0.75rem;
+            font-weight: 400;
         }
 
         /* --- Tabla de Horario --- */
+        .schedule-card {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+        }
+
         table {
             width: 100%;
             border-collapse: collapse;
-            background: white;
-            border-radius: 8px;
-            overflow: hidden;
+            margin-top: 20px;
         }
 
         th { background: var(--tec-teal); color: white; padding: 15px; text-align: left; }
-        td { padding: 15px; border-bottom: 1px solid #eee; }
+        td { padding: 15px; border-bottom: 1px solid #eee; color: #444; }
 
     </style>
 </head>
 <body>
 
     <nav>
-        <div class="logo-container">TECMILENIO</div>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/6/65/Universidad_Tecmilenio.png" alt="Tecmilenio" class="nav-logo">
+        
         <a href="#" onclick="showSection('credencial')" class="active" id="link-credencial">
             <i class="fas fa-id-card"></i> Credencial Digital
         </a>
         <a href="#" onclick="showSection('horario')" id="link-horario">
-            <i class="fas fa-calendar-alt"></i> Horario
+            <i class="fas fa-calendar-alt"></i> Mi Horario
         </a>
-        <a href="#"><i class="fas fa-book"></i> Calificaciones</a>
+        <a href="#"><i class="fas fa-graduation-cap"></i> Mi Plan de Estudios</a>
+        <a href="#"><i class="fas fa-user-circle"></i> Perfil</a>
     </nav>
 
     <main>
         <section id="credencial" class="active">
-            <h1>Credencial Estudiantil</h1>
+            <h1 style="color: var(--tec-dark-blue);">Credencial Digital</h1>
             <div class="id-card">
                 <div class="card-header">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/6/65/Universidad_Tecmilenio.png" class="mini-logo" alt="Logo">
                     <span class="tec-logo-text">TECMILENIO</span>
+                    
                     <div class="pixel-decor">
                         <div class="pixel transparent"></div><div class="pixel"></div><div class="pixel"></div>
                         <div class="pixel"></div><div class="pixel"></div><div class="pixel"></div>
@@ -191,60 +216,64 @@
                 
                 <div class="card-body">
                     <div class="photo-space">
-                        <img src="https://via.placeholder.com/140x160?text=FOTO+JESUS" alt="Jesus Arath">
+                        <img src="https://via.placeholder.com/135x165?text=MAYRA+FOTO" alt="Mayra Patricia">
                     </div>
                     <div class="student-info">
-                        <h2>Jesus Arath<br>Reyna Hernandez</h2>
-                        <p><strong>AL03097935</strong></p>
-                        <p>Posgrado</p>
+                        <h2>Mayra Patricia<br>Tolentino Martinez</h2>
+                        <p class="id-num">AL02762508</p>
+                        <p class="level">Posgrado</p>
                     </div>
                     <div class="campus-footer">
-                        Campus Cuautitlán Izcalli
+                        Campus San Nicolás
                     </div>
                 </div>
             </div>
-            <p style="color: #666; font-size: 0.8rem; margin-top: 20px;">Vigencia: 2024 (Digitalizada para Ciclo 2025-2026)</p>
+            <p style="color: #888; font-size: 0.85rem; margin-top: 25px;">
+                <i class="fas fa-check-circle"></i> Estatus: Alumno Activo - Ciclo 2025-2026
+            </p>
         </section>
 
         <section id="horario">
-            <h1>Horario Master en IA (Ciclo 2025-2026)</h1>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Materia</th>
-                        <th>Día</th>
-                        <th>Hora</th>
-                        <th>Modalidad</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td><strong>Deep Learning Aplicado</strong></td>
-                        <td>Lunes y Miércoles</td>
-                        <td>19:00 - 21:00</td>
-                        <td>Virtual / Online</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Ética y Gobernanza de la IA</strong></td>
-                        <td>Martes y Jueves</td>
-                        <td>19:00 - 21:00</td>
-                        <td>Presencial (Izcalli)</td>
-                    </tr>
-                </tbody>
-            </table>
+            <h1 style="color: var(--tec-dark-blue);">Horario Escolar</h1>
+            <div class="schedule-card">
+                <h3 style="margin-top:0; color: var(--tec-teal);">Master in Business Administration (Logística)</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Materia</th>
+                            <th>Día</th>
+                            <th>Hora</th>
+                            <th>Aula / Formato</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Administración de la Cadena de Suministro</strong></td>
+                            <td>Lunes y Miércoles</td>
+                            <td>18:30 - 20:30</td>
+                            <td>Híbrida - San Nicolás</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Estrategias Globales de Operaciones</strong></td>
+                            <td>Martes y Jueves</td>
+                            <td>18:30 - 20:30</td>
+                            <td>Online / Zoom</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </section>
     </main>
 
     <script>
         function showSection(sectionId) {
-            // Ocultar todas las secciones
             document.querySelectorAll('section').forEach(s => s.classList.remove('active'));
             document.querySelectorAll('nav a').forEach(a => a.classList.remove('active'));
             
-            // Mostrar la seleccionada
             document.getElementById(sectionId).classList.add('active');
             document.getElementById('link-' + sectionId).classList.add('active');
         }
     </script>
 </body>
-</html>
+    </html>
+    

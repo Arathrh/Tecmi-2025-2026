@@ -3,204 +3,164 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portal Estudiantil - Tecmilenio (Modo Claro)</title>
+    <title>Portal Estudiantil - Compacto</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
         :root {
-            /* Colores Institucionales */
             --tec-dark-blue: #004b61;
             --tec-teal: #008a96;
-            /* Colores Modo Claro */
             --bg-main: #ffffff;
-            --bg-side: #f8f9fa;
-            --text-dark: #333333;
-            --border-color: #e0e0e0;
+            --bg-side: #fbfbfb;
+            --border-color: #ededed;
         }
 
         body {
-            font-family: 'Segoe UI', Arial, sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             margin: 0;
             display: flex;
             height: 100vh;
             background-color: var(--bg-main);
-            color: var(--text-dark);
+            font-size: 14px; /* Tamaño de fuente base más pequeño */
         }
 
-        /* --- Barra Lateral (Modo Claro) --- */
+        /* --- Barra Lateral Reducida --- */
         nav {
-            width: 260px;
+            width: 210px; /* Reducción de ancho */
             background-color: var(--bg-side);
-            color: var(--tec-dark-blue);
             display: flex;
             flex-direction: column;
-            padding: 20px 0;
+            padding: 15px 0;
             border-right: 1px solid var(--border-color);
+            flex-shrink: 0;
         }
 
         .nav-logo {
-            width: 180px;
-            margin: 0 auto 30px auto;
+            width: 140px; /* Logo más pequeño */
+            margin: 0 auto 20px auto;
             display: block;
-            /* Filtro removido para ver el logo original a color */
         }
 
         nav a {
-            padding: 15px 25px;
-            color: #555;
+            padding: 10px 20px;
+            color: #666;
             text-decoration: none;
             display: flex;
             align-items: center;
-            transition: 0.3s;
-            font-size: 0.95rem;
-            border-left: 4px solid transparent;
+            transition: 0.2s;
+            font-size: 0.85rem;
         }
 
-        nav a:hover {
-            background-color: #eee;
-            color: var(--tec-teal);
-        }
+        nav a:hover { background-color: #f0f4f5; color: var(--tec-teal); }
 
         nav a.active {
             background-color: #eef7f8;
             color: var(--tec-teal);
-            border-left: 4px solid var(--tec-teal);
+            border-left: 3px solid var(--tec-teal);
             font-weight: 600;
         }
 
-        nav i { margin-right: 15px; width: 20px; text-align: center; }
+        nav i { margin-right: 12px; width: 16px; text-align: center; font-size: 1rem; }
 
         /* --- Contenedor Principal --- */
         main {
             flex-grow: 1;
-            padding: 40px;
+            padding: 25px 40px; /* Menos espacio arriba/abajo */
             overflow-y: auto;
         }
+
+        h1 { font-size: 1.4rem; margin-bottom: 20px; }
 
         section { display: none; }
         section.active { display: block; }
 
-        /* --- Diseño de la Credencial (Modo Claro) --- */
+        /* --- Credencial Compacta (Escalada hacia abajo) --- */
         .id-card {
-            width: 450px;
-            height: 280px;
+            width: 380px; /* Tamaño reducido de 450px -> 380px */
+            height: 235px; /* Proporción ajustada */
             background-color: white;
-            border-radius: 12px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            border-radius: 10px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.06);
             position: relative;
             overflow: hidden;
             border: 1px solid var(--border-color);
         }
 
         .card-header {
-            padding: 12px 18px;
+            padding: 10px 15px;
             display: flex;
             align-items: center;
-            gap: 10px;
-            background: white;
+            gap: 8px;
         }
 
-        .mini-logo {
-            height: 25px;
-            width: auto;
-        }
+        .mini-logo { height: 20px; }
 
         .tec-logo-text {
             color: var(--tec-dark-blue);
             font-weight: 800;
-            font-size: 1.1rem;
-            letter-spacing: 0.5px;
+            font-size: 0.9rem;
+            letter-spacing: 0.3px;
         }
-
-        /* Cuadrícula decorativa */
-        .pixel-decor {
-            position: absolute;
-            top: 15px;
-            right: 15px;
-            display: grid;
-            grid-template-columns: repeat(3, 12px);
-            gap: 2px;
-        }
-        .pixel { width: 12px; height: 12px; background: var(--tec-teal); }
-        .pixel.transparent { opacity: 0; }
 
         .card-body {
             display: flex;
-            background-color: #fcfcfc; /* Fondo casi blanco */
-            height: 185px;
-            margin-top: 15px;
-            color: var(--tec-dark-blue); /* Texto oscuro */
+            background-color: #fafafa;
+            height: 155px;
+            margin-top: 10px;
+            color: var(--tec-dark-blue);
             position: relative;
-            border-top: 1px solid #eee;
+            border-top: 1px solid #f0f0f0;
         }
 
         .photo-space {
-            width: 135px;
-            height: 165px;
+            width: 110px; /* Foto más pequeña */
+            height: 135px;
             background: #eee;
-            margin: -25px 0 0 20px;
-            border: 3px solid white;
+            margin: -20px 0 0 15px;
+            border: 2px solid white;
             z-index: 2;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
         }
         
-        .photo-space img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
+        .photo-space img { width: 100%; height: 100%; object-fit: cover; }
 
-        .student-info {
-            padding: 20px 15px;
-            flex-grow: 1;
-        }
+        .student-info { padding: 15px; flex-grow: 1; }
 
         .student-info h2 {
             margin: 0;
-            font-size: 1.05rem;
+            font-size: 0.9rem;
             text-transform: uppercase;
-            line-height: 1.3;
-            font-weight: 700;
-            color: var(--tec-dark-blue);
+            line-height: 1.2;
         }
 
         .student-info .id-num {
-            margin: 8px 0 4px 0;
-            font-size: 0.95rem;
-            font-weight: 600;
-            letter-spacing: 1px;
+            margin: 5px 0 2px 0;
+            font-size: 0.85rem;
             color: var(--tec-teal);
+            font-weight: bold;
         }
 
-        .student-info .level {
-            font-size: 0.85rem;
-            color: #666;
-        }
+        .student-info .level { font-size: 0.75rem; color: #777; }
 
         .campus-footer {
             position: absolute;
-            bottom: 12px;
-            right: 18px;
-            font-size: 0.75rem;
-            font-weight: 600;
-            color: #999;
+            bottom: 8px;
+            right: 15px;
+            font-size: 0.65rem;
+            color: #bbb;
         }
 
-        /* --- Tabla de Horario (Modo Claro) --- */
+        /* --- Tabla Compacta --- */
         .schedule-card {
             background: white;
-            padding: 25px;
-            border-radius: 10px;
+            padding: 15px;
+            border-radius: 8px;
             border: 1px solid var(--border-color);
+            max-width: 800px;
         }
 
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
-        }
-
-        th { background: #f1f5f9; color: var(--tec-dark-blue); padding: 15px; text-align: left; border-bottom: 2px solid var(--tec-teal); }
-        td { padding: 15px; border-bottom: 1px solid #eee; color: #444; }
+        table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
+        th { background: #f8f9fa; color: var(--tec-dark-blue); padding: 10px; text-align: left; border-bottom: 2px solid var(--tec-teal); }
+        td { padding: 10px; border-bottom: 1px solid #f0f0f0; }
 
     </style>
 </head>
@@ -208,31 +168,20 @@
 
     <nav>
         <img src="https://upload.wikimedia.org/wikipedia/commons/6/65/Universidad_Tecmilenio.png" alt="Tecmilenio" class="nav-logo">
-        
-        <a href="#" onclick="showSection('credencial')" class="active" id="link-credencial">
-            <i class="fas fa-id-card"></i> Credencial Digital
-        </a>
-        <a href="#" onclick="showSection('horario')" id="link-horario">
-            <i class="fas fa-calendar-alt"></i> Mi Horario
-        </a>
-        <a href="#"><i class="fas fa-graduation-cap"></i> Mi Plan de Estudios</a>
+        <a href="#" onclick="showSection('credencial')" class="active" id="link-credencial"><i class="fas fa-id-card"></i> Credencial</a>
+        <a href="#" onclick="showSection('horario')" id="link-horario"><i class="fas fa-calendar-alt"></i> Horario</a>
+        <a href="#"><i class="fas fa-graduation-cap"></i> Plan</a>
         <a href="#"><i class="fas fa-user-circle"></i> Perfil</a>
     </nav>
 
     <main>
         <section id="credencial" class="active">
-            <h1 style="color: var(--tec-dark-blue);">Credencial Digital</h1>
+            <h1 style="color: var(--tec-dark-blue);">Mi Credencial</h1>
             <div class="id-card">
                 <div class="card-header">
                     <img src="https://upload.wikimedia.org/wikipedia/commons/6/65/Universidad_Tecmilenio.png" class="mini-logo" alt="Logo">
                     <span class="tec-logo-text">TECMILENIO</span>
-                    
-                    <div class="pixel-decor">
-                        <div class="pixel transparent"></div><div class="pixel"></div><div class="pixel"></div>
-                        <div class="pixel"></div><div class="pixel"></div><div class="pixel"></div>
-                    </div>
                 </div>
-                
                 <div class="card-body">
                     <div class="photo-space">
                         <img src="https://i.ibb.co/vzYp6mC/profile-linkedin.jpg" alt="Jesus Arath">
@@ -242,41 +191,35 @@
                         <p class="id-num">AL02762508</p>
                         <p class="level">Posgrado</p>
                     </div>
-                    <div class="campus-footer">
-                        Campus San Nicolás
-                    </div>
+                    <div class="campus-footer">Campus San Nicolás</div>
                 </div>
             </div>
-            <p style="color: #888; font-size: 0.85rem; margin-top: 25px;">
-                <i class="fas fa-check-circle" style="color: #28a745;"></i> Estatus: Alumno Activo - 2026
+            <p style="color: #999; font-size: 0.75rem; margin-top: 15px;">
+                <i class="fas fa-check-circle" style="color: #28a745;"></i> Activo - Ciclo 2026
             </p>
         </section>
 
         <section id="horario">
-            <h1 style="color: var(--tec-dark-blue);">Horario Escolar</h1>
+            <h1 style="color: var(--tec-dark-blue);">Horario</h1>
             <div class="schedule-card">
-                <h3 style="margin-top:0; color: var(--tec-teal);">Master in Inteligencia Artificial</h3>
                 <table>
                     <thead>
                         <tr>
                             <th>Materia</th>
                             <th>Día</th>
                             <th>Hora</th>
-                            <th>Aula / Formato</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
                             <td><strong>Aprendizaje Profundo</strong></td>
-                            <td>Lunes y Miércoles</td>
+                            <td>Lun/Mié</td>
                             <td>18:30 - 20:30</td>
-                            <td>Híbrida - Cuautitlán Izcalli</td>
                         </tr>
                         <tr>
                             <td><strong>Redes Neuronales</strong></td>
-                            <td>Martes y Jueves</td>
+                            <td>Mar/Jue</td>
                             <td>18:30 - 20:30</td>
-                            <td>Online / Zoom</td>
                         </tr>
                     </tbody>
                 </table>
@@ -288,7 +231,6 @@
         function showSection(sectionId) {
             document.querySelectorAll('section').forEach(s => s.classList.remove('active'));
             document.querySelectorAll('nav a').forEach(a => a.classList.remove('active'));
-            
             document.getElementById(sectionId).classList.add('active');
             document.getElementById('link-' + sectionId).classList.add('active');
         }

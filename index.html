@@ -3,13 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portal Estudiantil - Optimizado</title>
+    <title>Portal Estudiantil - Barra Inteligente</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
         :root {
             --tec-dark-blue: #004b61;
             --tec-teal: #008a96;
             --bg-gray: #f8fafb;
+            --nav-width-collapsed: 70px;
+            --nav-width-expanded: 220px;
         }
 
         body {
@@ -21,9 +23,9 @@
             overflow: hidden;
         }
 
-        /* --- Barra Lateral Ajustada (Más delgada) --- */
+        /* --- Barra Lateral Colapsable --- */
         nav {
-            width: 200px; /* Reducción de 260px a 200px */
+            width: var(--nav-width-collapsed);
             background-color: #ffffff;
             color: var(--tec-dark-blue);
             display: flex;
@@ -31,50 +33,80 @@
             padding: 15px 0;
             border-right: 1px solid #e0e6e8;
             flex-shrink: 0;
+            transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            overflow: hidden;
+            white-space: nowrap;
+            z-index: 10;
+        }
+
+        /* Se expande al pasar el mouse */
+        nav:hover {
+            width: var(--nav-width-expanded);
+            box-shadow: 5px 0 15px rgba(0,0,0,0.05);
         }
 
         .nav-logo {
-            width: 130px;
-            margin: 0 auto 20px auto;
+            width: 40px; /* Logo pequeño por defecto */
+            margin: 0 auto 30px auto;
             display: block;
+            transition: width 0.3s;
+        }
+
+        nav:hover .nav-logo {
+            width: 140px; /* Logo normal al expandir */
         }
 
         nav a {
-            padding: 12px 20px;
+            padding: 15px 25px;
             color: #5c7075;
             text-decoration: none;
             display: flex;
             align-items: center;
-            transition: 0.3s;
-            font-size: 0.85rem;
+            transition: 0.2s;
+            font-size: 0.9rem;
         }
 
         nav a:hover, nav a.active {
             background-color: #f0f7f8;
             color: var(--tec-teal);
-            font-weight: 600;
         }
 
-        nav i { margin-right: 12px; width: 18px; text-align: center; }
+        nav i { 
+            min-width: 20px; 
+            margin-right: 25px; 
+            font-size: 1.2rem; 
+            text-align: center;
+        }
+
+        /* Ocultar texto cuando está colapsado */
+        nav span {
+            opacity: 0;
+            transition: opacity 0.2s;
+        }
+
+        nav:hover span {
+            opacity: 1;
+        }
 
         /* --- Contenedor Principal --- */
         main {
             flex-grow: 1;
-            padding: 30px;
+            padding: 30px 50px;
             overflow-y: auto;
         }
 
-        h1 { font-size: 1.5rem; margin-top: 0; color: var(--tec-dark-blue); }
+        h1 { font-size: 1.6rem; color: var(--tec-dark-blue); margin-bottom: 25px; }
 
         section { display: none; }
         section.active { display: block; }
 
-        /* --- Credencial (Tamaño Original con Escala) --- */
+        /* --- Credencial (Mantiene diseño original con escala) --- */
         .id-card-container {
-            transform: scale(0.85); /* Reduce el tamaño visual al 85% */
-            transform-origin: top left; /* Mantiene la posición arriba a la izquierda */
+            transform: scale(0.9);
+            transform-origin: top left;
             width: 450px; 
             height: 280px;
+            margin-bottom: 20px;
         }
 
         .id-card {
@@ -88,77 +120,41 @@
             border: 1px solid #dce4e6;
         }
 
-        .card-header {
-            padding: 12px 18px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
+        .card-header { padding: 12px 18px; display: flex; align-items: center; gap: 10px; }
         .mini-logo { height: 25px; }
+        .tec-logo-text { color: var(--tec-dark-blue); font-weight: 800; font-size: 1.1rem; }
 
-        .tec-logo-text {
-            color: var(--tec-dark-blue);
-            font-weight: 800;
-            font-size: 1.1rem;
-        }
-
-        /* Recuperada la cuadrícula decorativa */
         .pixel-decor {
-            position: absolute;
-            top: 15px;
-            right: 15px;
-            display: grid;
-            grid-template-columns: repeat(3, 12px);
-            gap: 2px;
+            position: absolute; top: 15px; right: 15px;
+            display: grid; grid-template-columns: repeat(3, 12px); gap: 2px;
         }
         .pixel { width: 12px; height: 12px; background: var(--tec-teal); }
         .pixel.transparent { opacity: 0; }
 
-        /* Recuperada la barra verde/azul superior */
         .card-body {
-            display: flex;
-            background-color: var(--tec-dark-blue); /* Fondo oscuro original */
-            height: 185px;
-            margin-top: 15px;
-            color: white;
-            position: relative;
+            display: flex; background-color: var(--tec-dark-blue);
+            height: 185px; margin-top: 15px; color: white; position: relative;
         }
 
         .photo-space {
-            width: 135px;
-            height: 165px;
-            background: #fff;
-            margin: -25px 0 0 20px;
-            border: 3px solid white;
-            z-index: 2;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            width: 135px; height: 165px; background: #fff;
+            margin: -25px 0 0 20px; border: 3px solid white;
+            z-index: 2; box-shadow: 0 4px 10px rgba(0,0,0,0.2);
         }
         
         .photo-space img { width: 100%; height: 100%; object-fit: cover; }
-
         .student-info { padding: 20px 15px; flex-grow: 1; }
         .student-info h2 { margin: 0; font-size: 1.05rem; text-transform: uppercase; }
         .student-info .id-num { margin: 8px 0 4px 0; font-size: 0.95rem; font-weight: 600; }
         .student-info .level { font-size: 0.85rem; opacity: 0.8; }
+        .campus-footer { position: absolute; bottom: 12px; right: 18px; font-size: 0.75rem; }
 
-        .campus-footer {
-            position: absolute;
-            bottom: 12px;
-            right: 18px;
-            font-size: 0.75rem;
-        }
-
-        /* --- Tabla de Horario Compacta --- */
+        /* --- Tabla Horario --- */
         .schedule-card {
-            background: white;
-            padding: 20px;
-            border-radius: 10px;
-            border: 1px solid #e0e6e8;
-            max-width: 700px;
+            background: white; padding: 20px; border-radius: 10px;
+            border: 1px solid #e0e6e8; max-width: 800px;
         }
-
-        table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
+        table { width: 100%; border-collapse: collapse; }
         th { background: #f4f8f9; color: var(--tec-dark-blue); padding: 12px; text-align: left; border-bottom: 2px solid var(--tec-teal); }
         td { padding: 12px; border-bottom: 1px solid #eee; }
 
@@ -167,28 +163,27 @@
 <body>
 
     <nav>
-        <img src="https://upload.wikimedia.org/wikipedia/commons/6/65/Universidad_Tecmilenio.png" alt="Tecmilenio" class="nav-logo">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/6/65/Universidad_Tecmilenio.png" alt="Tec" class="nav-logo">
         
         <a href="#" onclick="showSection('credencial')" class="active" id="link-credencial">
-            <i class="fas fa-id-card"></i> Credencial
+            <i class="fas fa-id-card"></i> <span>Credencial</span>
         </a>
         <a href="#" onclick="showSection('horario')" id="link-horario">
-            <i class="fas fa-calendar-alt"></i> Horario
+            <i class="fas fa-calendar-alt"></i> <span>Horario</span>
         </a>
-        <a href="#"><i class="fas fa-graduation-cap"></i> Plan</a>
-        <a href="#"><i class="fas fa-user-circle"></i> Perfil</a>
+        <a href="#"><i class="fas fa-graduation-cap"></i> <span>Mi Plan</span></a>
+        <a href="#"><i class="fas fa-user-circle"></i> <span>Perfil</span></a>
     </nav>
 
     <main>
         <section id="credencial" class="active">
-            <h1>Mi Credencial Digital</h1>
+            <h1>Panel Estudiantil</h1>
             
             <div class="id-card-container">
                 <div class="id-card">
                     <div class="card-header">
                         <img src="https://upload.wikimedia.org/wikipedia/commons/6/65/Universidad_Tecmilenio.png" class="mini-logo" alt="Logo">
                         <span class="tec-logo-text">TECMILENIO</span>
-                        
                         <div class="pixel-decor">
                             <div class="pixel transparent"></div><div class="pixel"></div><div class="pixel"></div>
                             <div class="pixel"></div><div class="pixel"></div><div class="pixel"></div>
@@ -197,47 +192,33 @@
                     
                     <div class="card-body">
                         <div class="photo-space">
-                            <img src="1774809095162~2.png" alt="Jesus Arath">
+                            <img src="https://i.ibb.co/vzYp6mC/profile-linkedin.jpg" alt="Jesus Arath">
                         </div>
                         <div class="student-info">
                             <h2>Jesus Arath<br>Reyna Hernandez</h2>
                             <p class="id-num">AL02762508</p>
                             <p class="level">Posgrado</p>
                         </div>
-                        <div class="campus-footer">
-                            Campus San Nicolás
-                        </div>
+                        <div class="campus-footer">Campus San Nicolás</div>
                     </div>
                 </div>
             </div>
 
-            <p style="color: #888; font-size: 0.8rem; margin-top: -10px;">
-                <i class="fas fa-check-circle" style="color: #28a745;"></i> Alumno Activo - 2026
+            <p style="color: #888; font-size: 0.85rem;">
+                <i class="fas fa-check-circle" style="color: #28a745;"></i> Estatus: Alumno Activo
             </p>
         </section>
 
         <section id="horario">
-            <h1>Horario Escolar</h1>
+            <h1>Mi Horario</h1>
             <div class="schedule-card">
                 <table>
                     <thead>
-                        <tr>
-                            <th>Materia</th>
-                            <th>Día</th>
-                            <th>Hora</th>
-                        </tr>
+                        <tr><th>Materia</th><th>Día</th><th>Hora</th></tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td><strong>Aprendizaje Profundo</strong></td>
-                            <td>Lunes y Miércoles</td>
-                            <td>18:30 - 20:30</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Redes Neuronales</strong></td>
-                            <td>Martes y Jueves</td>
-                            <td>18:30 - 20:30</td>
-                        </tr>
+                        <tr><td><strong>Aprendizaje Profundo</strong></td><td>Lun / Mié</td><td>18:30 - 20:30</td></tr>
+                        <tr><td><strong>Redes Neuronales</strong></td><td>Mar / Jue</td><td>18:30 - 20:30</td></tr>
                     </tbody>
                 </table>
             </div>
@@ -248,7 +229,6 @@
         function showSection(sectionId) {
             document.querySelectorAll('section').forEach(s => s.classList.remove('active'));
             document.querySelectorAll('nav a').forEach(a => a.classList.remove('active'));
-            
             document.getElementById(sectionId).classList.add('active');
             document.getElementById('link-' + sectionId).classList.add('active');
         }
